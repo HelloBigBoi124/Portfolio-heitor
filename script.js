@@ -143,118 +143,84 @@ document.querySelectorAll('.flip-btn').forEach(button => {
     });
 });
 
-// Carousel functionality
-const carouselTrack = document.querySelector('.carousel-track');
-const carouselSlides = document.querySelectorAll('.carousel-slide');
-const prevButton = document.querySelector('.carousel-prev');
-const nextButton = document.querySelector('.carousel-next');
+// Carrossel
+const carousel = document.querySelector('.carousel');
+const prevBtn = document.querySelector('.carousel-prev');
+const nextBtn = document.querySelector('.carousel-next');
+const items = document.querySelectorAll('.carousel-item');
 const indicators = document.querySelectorAll('.carousel-indicator');
 
-let currentIndex = 0;
-const slideWidth = carouselSlides[0].offsetWidth;
-const totalSlides = carouselSlides.length;
+if (carousel && prevBtn && nextBtn && items.length > 0) {
+    let currentIndex = 0;
+    const itemWidth = items[0].offsetWidth;
+    const visibleItems = Math.floor(carousel.offsetWidth / itemWidth);
+    const maxIndex = items.length - visibleItems;
 
-function updateCarousel() {
-    carouselTrack.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
-    
-    // Update active/inactive classes for animations
-    carouselSlides.forEach((slide, index) => {
-        if (index === currentIndex) {
-            slide.classList.remove('inactive');
-            slide.classList.add('active');
-        } else {
-            slide.classList.remove('active');
-            slide.classList.add('inactive');
+    function updateCarousel() {
+        carousel.scrollTo({
+            left: currentIndex * itemWidth,
+            behavior: 'smooth'
+        });
+        
+        // Atualiza indicadores
+        indicators.forEach((indicator, index) => {
+            if (index === currentIndex) {
+                indicator.classList.add('active');
+                indicator.classList.remove('bg-opacity-30');
+                indicator.classList.add('bg-opacity-100');
+            } else {
+                indicator.classList.remove('active');
+                indicator.classList.add('bg-opacity-30');
+                indicator.classList.remove('bg-opacity-100');
+            }
+        });
+    }
+
+    prevBtn.addEventListener('click', () => {
+        if (currentIndex > 0) {
+            currentIndex--;
+            updateCarousel();
         }
     });
-    
-    // Update indicators
+
+    nextBtn.addEventListener('click', () => {
+        if (currentIndex < maxIndex) {
+            currentIndex++;
+            updateCarousel();
+        }
+    });
+
+    // Adiciona clique nos indicadores
     indicators.forEach((indicator, index) => {
-        if (index === currentIndex) {
-            indicator.classList.add('active');
-            indicator.classList.remove('bg-opacity-30');
-            indicator.classList.add('bg-opacity-100');
+        indicator.addEventListener('click', () => {
+            currentIndex = index;
+            updateCarousel();
+        });
+    });
+
+    // Auto-avanço do carrossel
+    let interval = setInterval(() => {
+        if (currentIndex < maxIndex) {
+            currentIndex++;
         } else {
-            indicator.classList.remove('active');
-            indicator.classList.add('bg-opacity-30');
-            indicator.classList.remove('bg-opacity-100');
+            currentIndex = 0;
         }
-    });
-}
-
-prevButton.addEventListener('click', () => {
-    currentIndex = (currentIndex > 0) ? currentIndex - 1 : totalSlides - 1;
-    updateCarousel();
-});
-
-nextButton.addEventListener('click', () => {
-    currentIndex = (currentIndex < totalSlides - 1) ? currentIndex + 1 : 0;
-    updateCarousel();
-});
-
-// Indicator click functionality
-indicators.forEach((indicator, index) => {
-    indicator.addEventListener('click', () => {
-        currentIndex = index;
-        updateCarousel();
-    });
-});
-
-// Auto-advance carousel
-let carouselInterval = setInterval(() => {
-    currentIndex = (currentIndex < totalSlides - 1) ? currentIndex + 1 : 0;
-    updateCarousel();
-}, 5000);
-
-// Pause carousel on hover
-const carouselContainer = document.querySelector('.carousel-container');
-carouselContainer.addEventListener('mouseenter', () => {
-    clearInterval(carouselInterval);
-});
-
-carouselContainer.addEventListener('mouseleave', () => {
-    carouselInterval = setInterval(() => {
-        currentIndex = (currentIndex < totalSlides - 1) ? currentIndex + 1 : 0;
         updateCarousel();
     }, 5000);
-});
 
-// Animate skill bars on scroll
-const skillBars = document.querySelectorAll('.skill-progress');
+    // Pausa ao passar o mouse
+    carousel.addEventListener('mouseenter', () => {
+        clearInterval(interval);
+    });
 
-function animateSkillBars() {
-    skillBars.forEach(bar => {
-        const width = bar.style.width;
-        bar.style.width = '0';
-        
-        setTimeout(() => {
-            bar.style.width = width;
-        }, 100);
+    carousel.addEventListener('mouseleave', () => {
+        interval = setInterval(() => {
+            if (currentIndex < maxIndex) {
+                currentIndex++;
+            } else {
+                currentIndex = 0;
+            }
+            updateCarousel();
+        }, 5000);
     });
 }
-
-// Intersection Observer for skill bars animation
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            animateSkillBars();
-            observer.unobserve(entry.target);
-        }
-    });
-}, { threshold: 0.5 });
-
-const skillsSection = document.getElementById('skills');
-if (skillsSection) {
-    observer.observe(skillsSection);
-}
-
-// Add hover effect to buttons
-document.querySelectorAll('button, a').forEach(element => {
-    element.addEventListener('mouseenter', () => {
-        element.style.transform = 'translateY(-2px)';
-    });
-    
-    element.addEventListener('mouseleave', () => {
-        element.style.transform = 'translateY(0)';
-    });
-});
