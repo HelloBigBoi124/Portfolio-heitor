@@ -81,6 +81,10 @@ body {
     cursor: pointer;
 }
 
+.shadow-button:hover {
+    box-shadow: 0 10px 15px -3px rgba(185, 185, 185, 0.3);
+}
+
 .carousel-indicator.active {
     opacity: 1;
 }
@@ -167,7 +171,17 @@ body {
 
 .btn-accent:hover {
     transform: translateY(-2px);
+    background: linear-gradient(135deg, var(--accent), #00b3ff);
     box-shadow: 0 10px 15px -3px rgba(125, 211, 252, 0.3);
+}
+
+.btn-aim {
+    transition: all 0.3s ease;
+}
+
+.btn-aim:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(185, 185, 185, 0.3);
 }
 
 .section-title {
