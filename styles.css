@@ -85,6 +85,15 @@ body {
     box-shadow: 0 10px 15px -3px rgba(185, 185, 185, 0.3);
 }
 
+.project-buttons {
+    transition: ease 0.3s;
+}
+
+.project-buttons:active {
+    transition: ease 0.3s;
+    transform: translateY(10px);
+}
+
 .carousel-indicator.active {
     opacity: 1;
 }
