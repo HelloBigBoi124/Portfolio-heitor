@@ -14,7 +14,7 @@
 
 ### Back-end  
 - **Python**: Desenvolvimento de APIs e lógica de negócio com Flask/Django.  
-- **MySQL**: Banco de dados relacional para armazenamento e gestão de dados.  
+- **Firebase**: Banco de dados relacional para armazenamento e gestão de dados.  
 
 ### Ferramentas & Outros  
 - Git/GitHub: Controle de versão e colaboração em projetos.  

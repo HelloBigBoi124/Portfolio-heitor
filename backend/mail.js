@@ -12,16 +12,15 @@ const firebaseConfig = {
   //initialize firebase 
   firebase.initializeApp(firebaseConfig);
 
-  // Após firebase.initializeApp(firebaseConfig)
 
 // Autenticação anônima
-firebase.auth().signInAnonymously()
+  firebase.auth().signInAnonymously()
   .then(() => {
-    console.log('Autenticado anonimamente com sucesso!');
-  })
-  .catch((error) => {
-    console.error('Erro na autenticação anônima:', error);
-  });
+        console.log('Authenticated anonymously successfully.');
+    })
+    .catch((error) => {
+        console.error('Error in anonymous authentication:', error);
+    });
 
 
   //reference your database
@@ -103,7 +102,7 @@ const buttonFormError = () => {
         formButton.innerText = "Send Message";
         formButton.classList.remove('form-error');
         formButton.classList.add('form-button');
-    }, 300)
+    }, 1000)
     setTimeout(() => {
         formButton.classList.remove('error-clicked')
     }, 150)
