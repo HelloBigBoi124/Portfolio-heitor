@@ -98,12 +98,12 @@ body {
     opacity: 1;
 }
 
-/* Para navegadores baseados no Webkit (Chrome, Safari, etc.) */
+
 .scrollbar-hide::-webkit-scrollbar {
     display: none; /* Esconde a barra de rolagem */
 }
 
-/* Para navegadores compatíveis com scrollbar-width (Firefox, etc.) */
+
   .scrollbar-hide {
     scrollbar-width: none; /* Remove a barra de rolagem */
 }
@@ -231,4 +231,58 @@ body {
 .carousel-slide.inactive {
     transform: scale(0.95);
     opacity: 0.5;
+}
+
+/* Form Button */
+
+.form-button {
+    background: linear-gradient(135deg, var(--accent), #38bdf8);
+    transition: all 0.3s ease;
+}
+
+.form-button:hover {
+    transform: translateY(-2px);
+    background: linear-gradient(135deg, var(--accent), #00b3ff);
+    box-shadow: 0 10px 15px -3px rgba(125, 211, 252, 0.3);
+}
+
+.form-sent {
+    background: linear-gradient(135deg, #00ff62, #00a33f);
+    transition: all 0.3s ease;
+}
+
+.form-sent:hover {
+    transform: translateY(-2px);
+    background: linear-gradient(135deg, #00cf4f, #008834);
+    box-shadow: 0 10px 15px -3px rgb(0, 136, 52, 0.3);
+}
+
+.form-error {
+    background: linear-gradient(135deg, #f30c0c, #ca0707);
+    transition: all 0.3s ease;
+}
+
+.error-clicked {
+    animation: form-error 0.15s ease;
+}
+
+.form-error:hover {
+    transform: translateY(-2px);
+    background: linear-gradient(135deg, #db0b0b, #ac0505);
+    box-shadow: 0 10px 15px -3px rgba(136, 0, 0, 0.3);
+}
+
+@keyframes form-error {
+    0% {
+        translate: 0;
+    }
+    33.333% {
+        translate: 10px;
+    }
+    66.666% {
+        translate: -10px;
+    }
+    100% {
+        translate: 0;
+    }
 }

@@ -224,3 +224,4 @@ if (carousel && prevBtn && nextBtn && items.length > 0) {
         }, 5000);
     });
 }
+
