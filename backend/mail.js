@@ -6,11 +6,23 @@ const firebaseConfig = {
     projectId: "contactform-c546f",
     storageBucket: "contactform-c546f.firebasestorage.app",
     messagingSenderId: "187022137870",
-    appId: "1:187022137870:web:c0178e1cbc6a6632e4fa5f"
-  };
+    appId: "1:187022137870:web:0d1525bae7ccbcefe4fa5f"
+  };  
 
   //initialize firebase 
   firebase.initializeApp(firebaseConfig);
+
+  // Após firebase.initializeApp(firebaseConfig)
+
+// Autenticação anônima
+firebase.auth().signInAnonymously()
+  .then(() => {
+    console.log('Autenticado anonimamente com sucesso!');
+  })
+  .catch((error) => {
+    console.error('Erro na autenticação anônima:', error);
+  });
+
 
   //reference your database
   var contactFormDB = firebase.database().ref('contactForm');
@@ -27,7 +39,6 @@ const firebaseConfig = {
   const numberSFX = () => {
     playSFX = Math.floor(Math.random() * 2) + 1
   }
-
 
   //Formulário
   function submitForm(e) {
