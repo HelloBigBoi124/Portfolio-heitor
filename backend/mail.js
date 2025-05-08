@@ -63,9 +63,9 @@ const saveMessages = (nameContent, emailContent, subjectContent, messageContent)
 
     newContactForm.set({
         name : nameContent,
-        emailid : emailContent,
-        subjectid : subjectContent,
-        messageid : messageContent,
+        email : emailContent,
+        subject : subjectContent,
+        message : messageContent
     })
 }
 
