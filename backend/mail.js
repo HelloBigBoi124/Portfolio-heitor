@@ -38,8 +38,6 @@ const firebaseConfig = {
     var subjectContent = getElementVal('subjectId');
     var messageContent = getElementVal('messageId');
 
-    
-    
     if (nameContent === "" || emailContent === "" || subjectContent === "" || messageContent === "") {        
             numberSFX();
             buttonFormError();
