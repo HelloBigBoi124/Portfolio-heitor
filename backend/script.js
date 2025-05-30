@@ -135,14 +135,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Project card flip functionality
-document.querySelectorAll('.flip-btn').forEach(button => {
-    button.addEventListener('click', function() {
-        const projectCard = this.closest('.project-card');
-        projectCard.classList.toggle('flipped');
-    });
-});
-
 // Carrossel
 const carousel = document.querySelector('.carousel');
 const prevBtn = document.querySelector('.carousel-prev');
@@ -176,18 +168,39 @@ if (carousel && prevBtn && nextBtn && items.length > 0) {
         });
     }
 
-    prevBtn.addEventListener('click', () => {
-        if (currentIndex > 0) {
-            currentIndex--;
+    let interval;
+
+    const doInterval = () => {
+        interval = setInterval(() => {
+            if (currentIndex < maxIndex) {
+                currentIndex++;
+            } else {
+                currentIndex = 0;
+            }
             updateCarousel();
-        }
+        }, 5000);
+    }
+
+    prevBtn.addEventListener('click', () => {
+        clearInterval(interval); 
+        if (currentIndex > 0) {
+                currentIndex--;
+            } else {
+                currentIndex = maxIndex;
+            }
+        updateCarousel();
+        doInterval();
     });
 
     nextBtn.addEventListener('click', () => {
+        clearInterval(interval)
         if (currentIndex < maxIndex) {
-            currentIndex++;
-            updateCarousel();
-        }
+                currentIndex++;
+            } else {
+                currentIndex = 0;
+            }
+        updateCarousel();
+        doInterval();
     });
 
     // Adiciona clique nos indicadores
@@ -198,30 +211,13 @@ if (carousel && prevBtn && nextBtn && items.length > 0) {
         });
     });
 
-    // Auto-avanço do carrossel
-    let interval = setInterval(() => {
-        if (currentIndex < maxIndex) {
-            currentIndex++;
-        } else {
-            currentIndex = 0;
-        }
-        updateCarousel();
-    }, 5000);
-
     // Pausa ao passar o mouse
     carousel.addEventListener('mouseenter', () => {
         clearInterval(interval);
     });
 
     carousel.addEventListener('mouseleave', () => {
-        interval = setInterval(() => {
-            if (currentIndex < maxIndex) {
-                currentIndex++;
-            } else {
-                currentIndex = 0;
-            }
-            updateCarousel();
-        }, 5000);
+        doInterval();
     });
 }
 
