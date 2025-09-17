@@ -146,11 +146,11 @@ if (carousel && prevBtn && nextBtn && items.length > 0) {
     let currentIndex = 0;
     const itemWidth = items[0].offsetWidth;
     const visibleItems = Math.floor(carousel.offsetWidth / itemWidth);
-    const maxIndex = items.length - visibleItems;
+    const maxIndex = items.length - 1;
 
     function updateCarousel() {
         carousel.scrollTo({
-            left: currentIndex * itemWidth,
+            left: currentIndex * itemWidth, aaaaaaaaaaaaaa
             behavior: 'smooth'
         });
         
