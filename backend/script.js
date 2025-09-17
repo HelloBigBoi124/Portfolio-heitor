@@ -150,7 +150,7 @@ if (carousel && prevBtn && nextBtn && items.length > 0) {
 
     function updateCarousel() {
         carousel.scrollTo({
-            left: currentIndex * itemWidth, aaaaaaaaaaaaaa
+            left: currentIndex * itemWidth, 
             behavior: 'smooth'
         });
         
